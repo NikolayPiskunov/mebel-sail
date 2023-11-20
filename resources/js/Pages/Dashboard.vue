@@ -1,12 +1,10 @@
 <script setup>
-import {router} from "@inertiajs/vue3";
+import AppLayout from "@/Layouts/AppLayout.vue";
 
-const logout = () => {
-  router.post(route('logout'));
-};
 </script>
 
 <template>
-    Dashboard
-    <q-btn @click="logout">Logout</q-btn>
+   <app-layout>
+      Dashboard
+   </app-layout>
 </template>
