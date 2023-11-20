@@ -1,8 +1,12 @@
 <script setup>
-import AppLayout from '@/Layouts/AppLayout.vue';
-import Welcome from '@/Components/Welcome.vue';
+import {router} from "@inertiajs/vue3";
+
+const logout = () => {
+  router.post(route('logout'));
+};
 </script>
 
 <template>
-    dashaboard
+    Dashboard
+    <q-btn @click="logout">Logout</q-btn>
 </template>

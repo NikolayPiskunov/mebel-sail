@@ -6,4 +6,5 @@ import {Head, Link} from '@inertiajs/vue3';
 <template>
   <Head title="Welcome"/>
   Welcome
+  <Link :href="route('login')">Login</Link>
 </template>
