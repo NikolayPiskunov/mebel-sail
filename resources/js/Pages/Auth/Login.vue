@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 import AuthLayout from '@/Layouts/AuthLayout.vue';
 import MLoginForm from "@/UI/Modules/Auth/MLoginForm.vue";
 import MLoginInput from "@/UI/Components/Auth/MLoginInput.vue";
