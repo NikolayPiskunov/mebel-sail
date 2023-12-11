@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Application\Navigation\Services\NavigationManager;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -36,8 +37,13 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        /** @var NavigationManager $navigationManager */
+        $navigationManager = app(NavigationManager::class);
+
         return array_merge(parent::share($request), [
-            //
+            'navigation' => [
+                'left_drawer' => $navigationManager->getLeftDrawerNavigation()->build(),
+            ],
         ]);
     }
 }
