@@ -12,4 +12,9 @@ class DashboardController extends Controller
     {
         return Inertia::render('Dashboard');
     }
+
+    public function edit(Request $request)
+    {
+        return Inertia::render('Editor');
+    }
 }

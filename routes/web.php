@@ -30,4 +30,5 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Dashboard\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/editor', [\App\Http\Controllers\Dashboard\DashboardController::class, 'edit'])->name('editor');
 });
