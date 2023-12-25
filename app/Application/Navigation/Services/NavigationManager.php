@@ -7,7 +7,7 @@ use App\Application\Navigation\Contracts\NavigationFactory;
 class NavigationManager
 {
     public function __construct(
-        private NavigationFactory $leftDraweFactory,
+        private NavigationFactory $leftDrawerFactory,
     )
     {
         //
@@ -15,6 +15,6 @@ class NavigationManager
 
     public function getLeftDrawerNavigation(): NavigationFactory
     {
-        return $this->leftDraweFactory;
+        return $this->leftDrawerFactory;
     }
 }

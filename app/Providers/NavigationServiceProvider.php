@@ -12,7 +12,10 @@ class NavigationServiceProvider extends ServiceProvider
     {
         $this->app->singleton(NavigationManager::class, function (): NavigationManager {
             return new NavigationManager(
-                new LeftDrawerFactory(config('navigation.left_drawer.left_menu.items', [])),
+                new LeftDrawerFactory(
+                    request(),
+                    config('navigation.left_drawer.left_menu.items', [])
+                ),
             );
         });
     }

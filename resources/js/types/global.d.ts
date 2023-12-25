@@ -1,7 +1,8 @@
-import { PageProps as InertiaPageProps } from '@inertiajs/core';
+import {ErrorBag, Errors, PageProps as InertiaPageProps, Page} from '@inertiajs/core';
 import { AxiosInstance } from 'axios';
 import ziggyRoute, { Config as ZiggyConfig } from 'ziggy-js';
-import { PageProps as AppPageProps } from './';
+import {NavigationItem} from "@/Contracts/Base/navigation";
+
 
 declare global {
   interface Window {
@@ -19,5 +20,18 @@ declare module 'vue' {
 }
 
 declare module '@inertiajs/core' {
-  interface PageProps extends InertiaPageProps, AppPageProps {}
+  interface PageProps extends Page<InertiaPageProps> {
+    props: {
+      errors: Errors & ErrorBag;
+      auth: {
+        user: {
+          name: string,
+        }
+      },
+      navigation: {
+        left_drawer: NavigationItem[]
+      },
+      [key: string]: any;
+    }
+  }
 }
