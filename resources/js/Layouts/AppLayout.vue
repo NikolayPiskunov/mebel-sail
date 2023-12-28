@@ -36,7 +36,6 @@ const {useLogout} = useAuth();
     <template #left-drawer>
       <m-left-drawer :open="openLeftDrawer" :items="leftDrawer"/>
     </template>
-    {{leftDrawer}}
     <slot></slot>
   </m-main-layout>
 </template>
