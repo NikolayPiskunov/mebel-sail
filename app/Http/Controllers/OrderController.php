@@ -10,7 +10,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $list = Order::limit(10)->get();
+        $list = Order::limit(10)->get(['id', 'title', 'price', 'deadline']);
 
         return Inertia::render('Orders/Orders', [
             'list' => $list,
