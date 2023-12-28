@@ -31,4 +31,13 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Dashboard\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/editor', [\App\Http\Controllers\Dashboard\DashboardController::class, 'edit'])->name('editor');
+
+    Route::prefix('orders')->name('orders')->group(function () {
+        Route::get('/', [\App\Http\Controllers\OrderController::class, 'index']);
+    });
+
+    Route::prefix('clients')->name('clients')->group(function () {
+        Route::get('/', [\App\Http\Controllers\ClientController::class, 'index']);
+    });
+
 });
