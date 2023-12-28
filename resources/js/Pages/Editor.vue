@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import AppLayout from "@/Layouts/AppLayout.vue";
 
+defineOptions({ layout: AppLayout })
 
 </script>
 
 <template>
-  <app-layout>
+  <div>
     Editor
-  </app-layout>
+  </div>
 </template>
 
 <style scoped>

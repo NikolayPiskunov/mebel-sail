@@ -5,17 +5,12 @@ defineProps<{
   list: Object[],
 }>()
 
+defineOptions({ layout: AppLayout })
+
 </script>
 
 <template>
-  <app-layout>
     <pre>
       {{list}}
     </pre>
-
-  </app-layout>
 </template>
-
-<style scoped>
-
-</style>
