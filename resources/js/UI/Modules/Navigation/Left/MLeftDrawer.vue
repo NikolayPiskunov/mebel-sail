@@ -9,7 +9,9 @@ defineProps<{
 }>()
 
 function goTo(url: string) {
-  router.get(url);
+  router.get(url, {}, {
+    preserveState: true,
+  });
 }
 
 const miniState = ref(true);
