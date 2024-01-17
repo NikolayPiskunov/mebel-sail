@@ -2,6 +2,7 @@ import './bootstrap';
 import '../css/app.css';
 
 import { createApp, h , DefineComponent} from 'vue';
+import { createPinia } from 'pinia'
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
@@ -14,6 +15,7 @@ import '@quasar/extras/material-icons/material-icons.css'
 import 'quasar/src/css/index.sass'
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+const pinia = createPinia()
 
 createInertiaApp({
   title: (title) => `${title} - ${appName}`,
@@ -23,6 +25,7 @@ createInertiaApp({
       .use(Quasar, {
         plugins: {}, // import Quasar plugins and add here
       })
+      .use(pinia)
       .use(plugin)
       .use(ZiggyVue, Ziggy)
       .mount(el);
