@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import AppLayout from "@/Layouts/AppLayout.vue";
 
-defineProps<{
-  list: Object[],
-}>()
-
 defineOptions({ layout: AppLayout })
+
+defineProps<{
+  orders: Object[],
+  columns: Column[],
+  row_id: string
+}>()
 
 interface Column {
   name: string,
@@ -16,21 +18,9 @@ interface Column {
   sortable?: boolean,
 }
 
-const columns: Column[] = [
-  { name: 'actions', label: 'Действия', field: 'actions', align: 'center' },
-  {
-    name: 'id',
-    required: true,
-    label: 'ID',
-    align: 'left',
-    field: 'id',
-    sortable: true
-  },
-  { name: 'title', align: 'center', label: 'Заголовок', field: 'title', sortable: true },
-  { name: 'price', label: 'Цена', field: 'price', sortable: true, align: 'center'  },
-  { name: 'deadline', label: 'Крайний срок', field: 'deadline', align: 'center'  },
-
-]
+function rowClick(row: any) {
+  console.log(row);
+}
 
 </script>
 
@@ -38,16 +28,16 @@ const columns: Column[] = [
   <div class="q-pa-md">
     <q-table
       :grid="$q.screen.xs"
-      :rows="list"
+      :rows="orders"
       :columns="columns"
-      row="id"
+      :row="row_id"
       bordered
     >
       <template v-slot:body-cell-actions="props">
         <q-td :props="props">
-          <div class="q-pa-md q-gutter-sm">
-            <q-btn round color="primary" icon="edit" size="sm"/>
-            <q-btn round color="negative" icon="delete" size="sm"/>
+          <div class="q-gutter-sm">
+            <q-btn round outline color="primary" icon="edit" size="sm" @click="rowClick(props)"/>
+            <q-btn round outline color="negative" icon="delete" size="sm"/>
           </div>
         </q-td>
       </template>
