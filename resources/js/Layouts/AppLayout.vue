@@ -2,7 +2,7 @@
 import MMainLayout from "@/UI/Layouts/MMainLayout.vue";
 import MHeader from "@/UI/Modules/Navigation/Top/MHeader.vue";
 import MLeftDrawer from "@/UI/Modules/Navigation/Left/MLeftDrawer.vue";
-import {ref} from "vue";
+import {onBeforeUpdate, ref} from "vue";
 import useAuth from "@/Utils/Auth/useAuth";
 import {usePage} from "@inertiajs/vue3";
 
@@ -13,13 +13,14 @@ function toggleLeftDrawer() {
 }
 
 const {navigation} = usePage<PageProps>().props;
-const leftDrawer = navigation.left_drawer;
+let leftDrawer = navigation.left_drawer;
+
+onBeforeUpdate(() => {
+  const {navigation} = usePage<PageProps>().props;
+  leftDrawer = navigation.left_drawer;
+})
 
 const {useLogout} = useAuth();
-
-function logout() {
-  useLogout();
-}
 
 </script>
 
@@ -28,7 +29,7 @@ function logout() {
     <template #header>
       <m-header
         @toggle-left-drawer="toggleLeftDrawer"
-        @logout="logout"
+        @logout="useLogout"
       />
     </template>
 

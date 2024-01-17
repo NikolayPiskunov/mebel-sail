@@ -1,10 +1,10 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 
+defineOptions({ layout: AppLayout })
+
 </script>
 
 <template>
-   <app-layout>
-      Dashboard
-   </app-layout>
+  <div>Dashboard</div>
 </template>

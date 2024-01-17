@@ -1,11 +1,18 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import {NavigationItem} from "@/Contracts/Base/navigation";
+import {router} from "@inertiajs/vue3";
 
 defineProps<{
   open: boolean,
   items: NavigationItem[]
 }>()
+
+function goTo(url: string) {
+  router.get(url, {}, {
+    preserveState: true,
+  });
+}
 
 const miniState = ref(true);
 
@@ -29,7 +36,8 @@ const miniState = ref(true);
           clickable
           v-ripple
           v-for="(item, key) in items"
-          :href="route(item.route)"
+          @click="goTo(route(item.route))"
+          preserve-scroll
           :key="key"
           :active="item.isActive"
         >

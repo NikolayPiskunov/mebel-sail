@@ -2,6 +2,16 @@
 
 return [
     'items' => [
+        'orders' => [
+            'label' => 'Заказы',
+            'icon' => 'toc',
+            'route' => 'orders',
+        ],
+        'clients' => [
+            'label' => 'Клиенты',
+            'icon' => 'groups',
+            'route' => 'clients',
+        ],
         'dashboard' => [
             'label' => 'Dashboard',
             'icon' => 'inbox',
