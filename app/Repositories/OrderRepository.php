@@ -3,17 +3,18 @@
 namespace App\Repositories;
 
 use App\Models\Orders\Order;
-use Illuminate\Support\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class OrderRepository extends BaseRepository
 {
     protected string $modelClass = Order::class;
 
-    public function page(int $limit = 10, int $offset = 0): Collection
+    public function page(int $limit = 10, int $page = 1): LengthAwarePaginator
     {
-        $query = $this->model->query();
-
-        return $this->pagination($query, $limit, $offset)->get();
+        return $this->model->query()->paginate(
+            perPage: $limit,
+            page: $page,
+        );
     }
 
     public function getCount(): int

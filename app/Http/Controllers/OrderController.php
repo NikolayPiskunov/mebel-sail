@@ -22,10 +22,9 @@ class OrderController extends Controller
     {
         $page = $request->get('page', 1);
         $perPage = $request->get('per_page', 10);
-        $offset = ($page - 1) * $perPage;
 
-        $orders = $this->orderRepository->page($perPage, $offset);
-        $ordersCount = $this->orderRepository->getCount();
+        $pagination = $this->orderRepository->page($perPage, $page);
+        $orders = $pagination->items();
 
         $table = TableFactory::createTable(config('tables.orders.columns'));
         $table->addActionsIf(Auth::check());
@@ -34,9 +33,9 @@ class OrderController extends Controller
             'orders' => $orders,
             'columns' => $table->toArray(),
             'row_id' => $table->getMainField(),
-            'page' => (int) $page,
-            'per_page' => $perPage,
-            'count' => $ordersCount,
+            'page' => $pagination->currentPage(),
+            'per_page' => $pagination->perPage(),
+            'count' => $pagination->total(),
         ]);
     }
 }
