@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import AppLayout from "@/Layouts/AppLayout.vue";
+import {router} from "@inertiajs/vue3";
+import {computed, ref} from "vue";
 
 defineOptions({ layout: AppLayout })
 
-defineProps<{
+const props = defineProps<{
   orders: Object[],
   columns: Column[],
-  row_id: string
+  row_id: string,
+  page: number,
+  per_page: number,
+  count: number,
 }>()
 
 interface Column {
@@ -22,6 +27,28 @@ function rowClick(row: any) {
   console.log(row);
 }
 
+const pagination = ref({
+  sortBy: 'desc',
+  descending: false,
+  rowsPerPage: props.per_page,
+})
+
+const pageValue = computed({
+  get() {
+    return props.page;
+  },
+  set(value) {
+    router.get(route().current(), {page: value}, {
+      preserveScroll: true
+    })
+  }
+});
+
+const pagesNumber = computed(() => Math.ceil(props.count / pagination.value.rowsPerPage));
+
+const pageHandler = () => {
+  console.log(route().current());
+}
 </script>
 
 <template>
@@ -31,7 +58,9 @@ function rowClick(row: any) {
       :rows="orders"
       :columns="columns"
       :row="row_id"
+      :pagination="pagination"
       bordered
+      hide-pagination
     >
       <template v-slot:body-cell-actions="props">
         <q-td :props="props">
@@ -41,6 +70,15 @@ function rowClick(row: any) {
           </div>
         </q-td>
       </template>
+
     </q-table>
+
+    <div class="row justify-center q-mt-md">
+      <q-pagination
+        v-model="pageValue"
+        color="grey-8"
+        :max="pagesNumber"
+      />
+    </div>
   </div>
 </template>
