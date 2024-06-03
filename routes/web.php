@@ -32,8 +32,11 @@ Route::middleware([
     Route::get('/dashboard', [\App\Http\Controllers\Dashboard\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/editor', [\App\Http\Controllers\Dashboard\DashboardController::class, 'edit'])->name('editor');
 
-    Route::prefix('orders')->name('orders')->group(function () {
-        Route::get('/', [\App\Http\Controllers\OrderController::class, 'index']);
+    Route::prefix('orders')->name('orders.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\OrderController::class, 'index'])->name('index');
+        Route::post('/', [\App\Http\Controllers\OrderController::class, 'store'])->name('store');
+        Route::get('/{order}/edit', [\App\Http\Controllers\OrderController::class, 'edit'])->name('edit');
+        Route::put('/{order}/edit', [\App\Http\Controllers\OrderController::class, 'update'])->name('update');
     });
 
     Route::prefix('clients')->name('clients')->group(function () {

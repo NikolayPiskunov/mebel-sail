@@ -5,7 +5,7 @@ return [
         'orders' => [
             'label' => 'Заказы',
             'icon' => 'toc',
-            'route' => 'orders',
+            'route' => 'orders.index',
         ],
         'clients' => [
             'label' => 'Клиенты',

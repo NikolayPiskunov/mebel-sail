@@ -2,6 +2,7 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import {router} from "@inertiajs/vue3";
 import {computed, ref} from "vue";
+import CreateOrderModal from "@/Pages/Orders/Modals/CreateOrderModal.vue";
 
 defineOptions({ layout: AppLayout })
 
@@ -38,7 +39,7 @@ const pageValue = computed({
     return props.page;
   },
   set(value) {
-    router.get(route().current(), {page: value}, {
+    router.get(route(route().current()), {page: value}, {
       preserveScroll: true
     })
   }
@@ -49,9 +50,17 @@ const pagesNumber = computed(() => Math.ceil(props.count / pagination.value.rows
 const pageHandler = () => {
   console.log(route().current());
 }
+
+const showCreateModal = ref(false);
 </script>
 
 <template>
+  <div class="row">
+    <div class="col">Orders</div>
+    <div class="col">
+      <q-btn @click="showCreateModal=true">New order</q-btn>
+    </div>
+  </div>
   <div class="q-pa-md">
     <q-table
       :grid="$q.screen.xs"
@@ -81,4 +90,5 @@ const pageHandler = () => {
       />
     </div>
   </div>
+  <CreateOrderModal v-model="showCreateModal"/>
 </template>

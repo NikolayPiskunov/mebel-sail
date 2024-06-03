@@ -11,10 +11,12 @@ class OrderRepository extends BaseRepository
 
     public function page(int $limit = 10, int $page = 1): LengthAwarePaginator
     {
-        return $this->model->query()->paginate(
-            perPage: $limit,
-            page: $page,
-        );
+        return $this->model->query()
+            ->orderBy('id', 'desc')
+            ->paginate(
+                perPage: $limit,
+                page: $page,
+            );
     }
 
     public function getCount(): int
