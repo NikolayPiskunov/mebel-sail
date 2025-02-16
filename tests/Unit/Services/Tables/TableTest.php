@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Services\Tables;
 
-use App\Application\Tables\Contracts\Table;
+use App\Application\Tables\BaseTable;
 use App\Services\Tables\Factory\TableFactory;
 
 class TableTest extends BaseTableTests
@@ -60,7 +60,7 @@ class TableTest extends BaseTableTests
 
         $table = TableFactory::createTable($config);
 
-        $this->assertInstanceOf( Table::class, $table);
+        $this->assertInstanceOf( BaseTable::class, $table);
         $this->assertCount(2, $table->toArray());
     }
 }

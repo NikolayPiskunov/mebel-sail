@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Services\Tables;
 
-use App\Application\Tables\Contracts\Column;
+use App\Application\Tables\TableColumn;
 
 class ColumnTest extends BaseTableTests
 {
@@ -10,7 +10,7 @@ class ColumnTest extends BaseTableTests
     {
         $column = $this->makeNameColumn();
 
-        $this->assertInstanceOf(Column::class, $column);
+        $this->assertInstanceOf(TableColumn::class, $column);
     }
 
     public function test_column_fields(): void

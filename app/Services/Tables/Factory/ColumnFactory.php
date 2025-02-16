@@ -2,13 +2,13 @@
 
 namespace App\Services\Tables\Factory;
 
-use App\Application\Tables\Contracts\Column;
+use App\Application\Tables\TableColumn;
 use App\Services\Tables\QuasarColumn;
 
 class ColumnFactory
 {
     // TODO:: пересмотреть класс, чтобы уйити от зависимости от конкретного класса
-    public static function makeFromArray(array $properties): Column
+    public static function makeFromArray(array $properties): TableColumn
     {
         return new QuasarColumn(
             $properties['field'] ?? '',
@@ -17,7 +17,7 @@ class ColumnFactory
         );
     }
 
-    public static function makeActionsColumn(string $align = 'left'): Column
+    public static function makeActionsColumn(string $align = 'left'): TableColumn
     {
         $field = 'actions';
         $label = 'Действия';

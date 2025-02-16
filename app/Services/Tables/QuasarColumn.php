@@ -2,9 +2,9 @@
 
 namespace App\Services\Tables;
 
-use App\Application\Tables\BaseColumn;
+use App\Application\Tables\TableColumn;
 
-class QuasarColumn extends BaseColumn
+class QuasarColumn extends TableColumn
 {
     public function __construct(
         protected string $field = '',

@@ -2,13 +2,10 @@
 
 namespace App\Application\Tables;
 
-use App\Application\Tables\Contracts\Column;
-use App\Application\Tables\Contracts\Table;
-
-abstract class BaseTable implements Table
+abstract class BaseTable
 {
     /**
-     * @var Column[]
+     * @var TableColumn[]
      */
     private array $columns = [];
 
@@ -18,7 +15,7 @@ abstract class BaseTable implements Table
     {
     }
 
-    public function addColumn(Column $column): self
+    public function addColumn(TableColumn $column): self
     {
         $this->columns[$column->getField()] = $column;
 
@@ -49,7 +46,7 @@ abstract class BaseTable implements Table
     public function toArray(): array
     {
         return array_values(
-            array_map(function (Column $column) {
+            array_map(function (TableColumn $column) {
                 return $column->toArray();
             }, $this->columns)
         );

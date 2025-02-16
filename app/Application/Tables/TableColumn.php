@@ -2,9 +2,7 @@
 
 namespace App\Application\Tables;
 
-use App\Application\Tables\Contracts\Column;
-
-abstract class BaseColumn implements Column
+abstract class TableColumn
 {
     protected string $field = '';
     protected string $label = '';

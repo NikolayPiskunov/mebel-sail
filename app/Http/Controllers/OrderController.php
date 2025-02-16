@@ -10,6 +10,7 @@ use App\Http\Requests\Orders\UpdateOrderRequest;
 use App\Models\Orders\Order;
 use App\Repositories\OrderRepository;
 use App\Services\Tables\Factory\TableFactory;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,9 @@ class OrderController extends Controller
         //
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function index(Request $request): Response
     {
         $this->authorize('viewAny', Order::class);
@@ -50,6 +54,9 @@ class OrderController extends Controller
         ]);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function edit(Order $order): Response
     {
         $this->authorize('edit', $order);
@@ -59,6 +66,9 @@ class OrderController extends Controller
         ]);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function update(UpdateOrderRequest $request, Order $order): RedirectResponse
     {
         $this->authorize('edit', $order);
@@ -68,6 +78,9 @@ class OrderController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function store(CreateOrderRequest $request): RedirectResponse
     {
         $this->authorize('create', Order::class);
@@ -77,6 +90,9 @@ class OrderController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function destroy(Order $order): RedirectResponse
     {
         $this->authorize($order, 'delete');
