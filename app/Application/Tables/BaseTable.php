@@ -16,7 +16,6 @@ abstract class BaseTable implements Table
         private string $mainField = 'id',
     )
     {
-        //
     }
 
     public function addColumn(Column $column): self
