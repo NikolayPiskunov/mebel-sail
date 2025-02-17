@@ -6,7 +6,7 @@ use App\Models\Orders\Order;
 
 class DeleteOrder
 {
-    public function __invoke(Order $order): bool
+    public function delete(Order $order): bool
     {
         return $order->delete();
     }

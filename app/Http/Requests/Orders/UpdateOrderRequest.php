@@ -2,16 +2,11 @@
 
 namespace App\Http\Requests\Orders;
 
+use App\Application\Order\Dtos\UpdateOrderDto;
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-
-/**
- * @property-read string $title
- * @property-read string $description
- * @property-read int $price
- * @property-read \DateTime $deadline
- */
 class UpdateOrderRequest extends FormRequest
 {
 
@@ -23,6 +18,10 @@ class UpdateOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => [
+                'required',
+                'int',
+            ],
             'title' => [
                 'required',
                 'string',
@@ -46,5 +45,13 @@ class UpdateOrderRequest extends FormRequest
                 'after:today',
             ],
         ];
+    }
+
+    public function toDto(): UpdateOrderDto
+    {
+        $data = $this->validated();
+        $data['deadline'] = new Carbon($data['deadline']);
+
+        return UpdateOrderDto::fromArray($data);
     }
 }

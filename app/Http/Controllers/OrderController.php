@@ -72,8 +72,9 @@ class OrderController extends Controller
     public function update(UpdateOrderRequest $request, Order $order): RedirectResponse
     {
         $this->authorize('edit', $order);
+        $updateOrderDto = $request->toDto();
 
-        ($this->updateOrder)($order, $request->validated());
+        $this->updateOrder->update($order, $updateOrderDto);
 
         return redirect()->back();
     }
@@ -84,8 +85,9 @@ class OrderController extends Controller
     public function store(CreateOrderRequest $request): RedirectResponse
     {
         $this->authorize('create', Order::class);
+        $createOrderDto = $request->toDto();
 
-        ($this->createOrder)($request->validated());
+        $this->createOrder->create($createOrderDto);
 
         return redirect()->back();
     }
@@ -97,7 +99,7 @@ class OrderController extends Controller
     {
         $this->authorize($order, 'delete');
 
-        ($this->deleteOrder)($order);
+        $this->deleteOrder->delete($order);
 
         return redirect()->back();
     }

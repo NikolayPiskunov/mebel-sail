@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Orders;
 
+use App\Application\Order\Dtos\CreateOrderDto;
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,5 +40,13 @@ class CreateOrderRequest extends FormRequest
                 'after:today',
             ],
         ];
+    }
+
+    public function toDto(): CreateOrderDto
+    {
+        $data = $this->validated();
+        $data['deadline'] = new Carbon($data['deadline']);
+
+        return CreateOrderDto::fromArray($data);
     }
 }

@@ -2,12 +2,22 @@
 
 namespace App\Actions\Orders;
 
+use App\Application\Order\Dtos\CreateOrderDto;
 use App\Models\Orders\Order;
 
 class CreateOrder
 {
-    public function __invoke(array $attributes): Order
+    public function create(CreateOrderDto $createOrderDto): Order
     {
-        return Order::create($attributes);
+        $attributes = [
+            'title' => $createOrderDto->title,
+            'description' => $createOrderDto->description,
+            'price' => $createOrderDto->price,
+            'deadline' => $createOrderDto->deadline,
+        ];
+
+        /** @var Order */
+        return (new Order())->newQuery()
+            ->create($attributes);
     }
 }
