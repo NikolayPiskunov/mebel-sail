@@ -42,7 +42,6 @@ class UpdateOrderRequest extends FormRequest
             'deadline' => [
                 'required',
                 'date',
-                'after:today',
             ],
         ];
     }

@@ -36,7 +36,8 @@ Route::middleware([
         Route::get('/', [\App\Http\Controllers\OrderController::class, 'index'])->name('index');
         Route::post('/', [\App\Http\Controllers\OrderController::class, 'store'])->name('store');
         Route::get('/{order}/edit', [\App\Http\Controllers\OrderController::class, 'edit'])->name('edit');
-        Route::put('/{order}/edit', [\App\Http\Controllers\OrderController::class, 'update'])->name('update');
+        Route::get('/{order}/edit', [\App\Http\Controllers\OrderController::class, 'edit'])->name('edit');
+        Route::delete('/{order}', [\App\Http\Controllers\OrderController::class, 'destroy'])->name('delete');
     });
 
     Route::prefix('clients')->name('clients')->group(function () {

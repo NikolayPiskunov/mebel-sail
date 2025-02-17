@@ -3,6 +3,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import {router} from "@inertiajs/vue3";
 import {computed, ref} from "vue";
 import CreateOrderModal from "@/Pages/Orders/Modals/CreateOrderModal.vue";
+import {Column, Order} from "@/types/entities";
 
 defineOptions({ layout: AppLayout })
 
@@ -15,17 +16,12 @@ const props = defineProps<{
   count: number,
 }>()
 
-interface Column {
-  name: string,
-  label: string,
-  field: string,
-  align?: "left" | "right" | "center",
-  required?: boolean,
-  sortable?: boolean,
+const toEdit = (row: Order) => {
+  router.get(route('orders.edit', {order: row.id}));
 }
 
-function rowClick(row: any) {
-  console.log(row);
+const destroy = (row: Order) => {
+  router.delete(route('orders.delete', {order: row.id}))
 }
 
 const pagination = ref({
@@ -46,10 +42,6 @@ const pageValue = computed({
 });
 
 const pagesNumber = computed(() => Math.ceil(props.count / pagination.value.rowsPerPage));
-
-const pageHandler = () => {
-  console.log(route().current());
-}
 
 const showCreateModal = ref(false);
 </script>
@@ -74,8 +66,8 @@ const showCreateModal = ref(false);
       <template v-slot:body-cell-actions="props">
         <q-td :props="props">
           <div class="q-gutter-sm">
-            <q-btn round outline color="primary" icon="edit" size="sm" @click="rowClick(props)"/>
-            <q-btn round outline color="negative" icon="delete" size="sm"/>
+            <q-btn round outline color="primary" icon="edit" size="sm" @click="toEdit(props.row)"/>
+            <q-btn round outline color="negative" icon="delete" size="sm" @click="destroy(props.row)"/>
           </div>
         </q-td>
       </template>
